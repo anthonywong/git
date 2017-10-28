@@ -1050,12 +1050,14 @@ static int do_pick_commit(enum todo_command command, struct commit *commit,
 			strbuf_addstr(&msgbuf, p);
 
 		if (opts->record_origin) {
-			strbuf_complete_line(&msgbuf);
-			if (!has_conforming_footer(&msgbuf, NULL, 0))
-				strbuf_addch(&msgbuf, '\n');
-			strbuf_addstr(&msgbuf, cherry_picked_prefix);
-			strbuf_addstr(&msgbuf, oid_to_hex(&commit->object.oid));
-			strbuf_addstr(&msgbuf, ")\n");
+			if (!opts->keep_existing_origin || strstr(msgbuf.buf, cherry_picked_prefix) == NULL) {
+				strbuf_complete_line(&msgbuf);
+				if (!has_conforming_footer(&msgbuf, NULL, 0))
+					strbuf_addch(&msgbuf, '\n');
+				strbuf_addstr(&msgbuf, cherry_picked_prefix);
+				strbuf_addstr(&msgbuf, oid_to_hex(&commit->object.oid));
+				strbuf_addstr(&msgbuf, ")\n");
+			}
 		}
 	}
 

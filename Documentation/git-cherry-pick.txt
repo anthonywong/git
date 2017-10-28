@@ -71,6 +71,14 @@ OPTIONS
 	development branch), adding this information can be
 	useful.
 
+--keep-existing-origin::
+	This option has to be used with -x to take effect. When
+	cherry-picking from a commit whose commit message already
+	contains the "(cherry picked from commit ...)" line, this
+	option will not add another one. This is useful when you are
+	cherry-picking from a bunch of commits, some are cherry-picks
+	and already contains the upstream hash but some do not.
+
 -r::
 	It used to be that the command defaulted to do `-x`
 	described above, and `-r` was to disable it.  Now the

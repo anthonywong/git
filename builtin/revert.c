@@ -122,6 +122,7 @@ static int run_sequencer(int argc, const char **argv, struct replay_opts *opts)
 			OPT_BOOL(0, "allow-empty", &opts->allow_empty, N_("preserve initially empty commits")),
 			OPT_BOOL(0, "allow-empty-message", &opts->allow_empty_message, N_("allow commits with empty messages")),
 			OPT_BOOL(0, "keep-redundant-commits", &opts->keep_redundant_commits, N_("keep redundant, empty commits")),
+			OPT_BOOL(0, "keep-existing-origin", &opts->keep_existing_origin, N_("do not add another hash if one already exists, use with -x")),
 			OPT_END(),
 		};
 		options = parse_options_concat(options, cp_extra);
@@ -157,6 +158,7 @@ static int run_sequencer(int argc, const char **argv, struct replay_opts *opts)
 				"--ff", opts->allow_ff,
 				"--rerere-autoupdate", opts->allow_rerere_auto == RERERE_AUTOUPDATE,
 				"--no-rerere-autoupdate", opts->allow_rerere_auto == RERERE_NOAUTOUPDATE,
+				"--keep-existing-origin", opts->keep_existing_origin,
 				NULL);
 	}
 
